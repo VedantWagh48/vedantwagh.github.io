@@ -6,26 +6,40 @@
   <title>Vedant Jagdish Wagh | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
 </head>
 <body>
 
-  <header class="hero">
-    <h1 class="fade-in">Vedant Jagdish Wagh</h1>
-    <p class="slide-up">Full Stack Developer | Computer Engineering Student</p>
+  <!-- Page Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>Loading Portfolio...</p>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <button id="darkToggle" title="Toggle Dark Mode">🌓</button>
+
+  <!-- Hero Section -->
+  <header class="hero" data-aos="fade-down">
+    <h1>Hi, I'm Vedant <span class="typing"></span></h1>
+    <p>Computer Engineering Student • Developer</p>
   </header>
 
-  <nav class="nav fade-in-delayed">
+  <!-- Navbar -->
+  <nav class="nav" data-aos="fade-down" data-aos-delay="200">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <section id="about" class="section fade-in">
+  <!-- About -->
+  <section id="about" class="section" data-aos="fade-up">
     <h2>About Me</h2>
-    <p>I'm a passionate web developer from Nashik, Maharashtra with experience in building responsive, user-friendly websites. I enjoy crafting interactive frontends and exploring new technologies. I recently interned at IdealTech Info, working on real-world web projects using HTML, CSS, JavaScript, Bootstrap, and Django.</p>
+    <p>I am a passionate web developer from Nashik, Maharashtra. I enjoy crafting responsive websites using HTML, CSS, JavaScript, Bootstrap, and Django. I recently interned at IdealTech Info, working on real-world web projects.</p>
   </section>
 
-  <section id="projects" class="section slide-up">
+  <!-- Projects -->
+  <section id="projects" class="section" data-aos="fade-up" data-aos-delay="200">
     <h2>Featured Projects</h2>
     <div class="project-grid">
       <div class="card">
@@ -36,32 +50,23 @@
       <div class="card">
         <h3>ShopAura – E-commerce</h3>
         <p>Men's grooming & essentials site with cart and smooth UX using HTML, CSS, JS, Bootstrap.</p>
-        <!-- Replace this with the GitHub repo or note it’s available locally -->
-        <a href="https://auragroom.netlify.app/" target="_blank">GitHub</a>
-        <!-- Or you can mention: -->
-        <!-- <p>Coming soon: View locally on your machine</p> -->
+        <a href="https://auragroom.netlify.app/" target="_blank">Live Demo</a>
       </div>
       <div class="card">
         <h3>Hospital Management System</h3>
         <p>Web-based hospital admin system using SQL, HTML, CSS, JS.</p>
-        <!-- Replace this with the GitHub repo or note it’s available locally -->
         <a href="https://github.com/VedantWagh48/Hospital-Management-System" target="_blank">GitHub</a>
-        <!-- Or you can mention: -->
-        <p>Coming soon: it’s available locally</p>
       </div>
       <div class="card">
         <h3>EduTrack – College Tracker</h3>
-        <p>Digital attendance and assignment tracker project built in VS Code with frontend-only stack.</p>
-        <!-- Replace this with the GitHub repo or note it’s available locally -->
+        <p>Digital attendance and assignment tracker built in VS Code using frontend stack.</p>
         <a href="https://github.com/VedantWagh48/EduTrack" target="_blank">GitHub</a>
-        <!-- Or you can mention: -->
-        <p>Coming soon: it’s available locally</p>
       </div>
     </div>
   </section>
-  
 
-  <section id="contact" class="section fade-in">
+  <!-- Contact -->
+  <section id="contact" class="section" data-aos="fade-up">
     <h2>Contact</h2>
     <p>Feel free to reach out via email or connect on GitHub.</p>
     <ul>
@@ -70,9 +75,50 @@
     </ul>
   </section>
 
-  <footer class="footer slide-up">
+  <!-- Footer -->
+  <footer class="footer" data-aos="fade-up">
     <p>© 2025 Vedant Jagdish Wagh. Built with ❤</p>
   </footer>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const words = ['Web Developer', 'Tech Enthusiast', 'Problem Solver'];
+    let wordIndex = 0, charIndex = 0;
+    const typingEl = document.querySelector('.typing');
+
+    function type() {
+      if (charIndex < words[wordIndex].length) {
+        typingEl.textContent += words[wordIndex].charAt(charIndex++);
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typingEl.textContent = words[wordIndex].substring(0, --charIndex);
+        setTimeout(erase, 50);
+      } else {
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      type();
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.body.classList.add("loaded");
+      }, 1500);
+
+      document.getElementById("darkToggle").addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+    });
+  </script>
 </body>
 </html>
